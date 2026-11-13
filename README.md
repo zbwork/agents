@@ -47,6 +47,6 @@ assets/agents/             # 原始头像
 python3 scripts/build.py --skills-catalog ../skills/catalog/v1/skills.json --check
 ```
 
-CI 只检查角色完整性、图片摘要与技能引用，直接读取 skills 的 GitHub 源码目录，不依赖 Pages 或 Release。后续客户端接入单独处理。
+PR CI 检查角色完整性、图片摘要与技能引用，直接读取 skills 的 GitHub 源码目录。main 推送或手动运行 Deploy Pages 会从 AGENT.md 生成客户端目录并部署到 https://zbwork.github.io/agents/ 。客户端匿名读取 catalog/v1/employees.json 和 assets/ 头像，不依赖 Release。请先部署 skills，再部署 agents。
 
 Codex 只做本地提交，远端推送由仓库所有者执行。
