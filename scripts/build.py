@@ -1,4 +1,4 @@
-"""Validate employees against the separately published skill registry."""
+"""Validate employees against the separate skills source registry."""
 import argparse,hashlib,json,pathlib,re,shutil
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 def main():
@@ -10,6 +10,14 @@ def main():
  for item in data['data']['items']:
   if item['uuid'] in seen:raise ValueError('Duplicate employee')
   seen.add(item['uuid'])
+  source=pathlib.PurePosixPath(item['prompt_file'])
+  if source.is_absolute() or '..' in source.parts or not str(source).startswith('agents/'):raise ValueError('Unsafe prompt path')
+  prompt_path=ROOT/source
+  if prompt_path.is_symlink() or not prompt_path.resolve().is_relative_to((ROOT/'agents').resolve()):raise ValueError('Prompt escapes role root')
+  item['system_prompt']=prompt_path.read_text()
+  if not item['system_prompt'].strip():
+   if item.get('prompt_status')!='not_configured':raise ValueError('Empty role prompt must be declared')
+   print('Existing source has no standalone prompt:',item['name'])
   if not set(item['skill_uuids'])<=ids:raise ValueError('Missing published skill dependency: '+item['name'])
   if forbidden.search(json.dumps(item).encode()):raise ValueError('Credential-like content')
   image=item.get('avatar_url','')

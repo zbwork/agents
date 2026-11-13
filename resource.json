@@ -1,1 +1,5 @@
-{"repository": "zbwork/agents", "pages": "https://zbwork.github.io/agents/", "skills_catalog": "https://zbwork.github.io/skills/catalog/v1/skills.json"}
+{
+  "repository": "zbwork/agents",
+  "pages": "https://zbwork.github.io/agents/",
+  "skills_catalog": "https://raw.githubusercontent.com/zbwork/skills/main/catalog/v1/skills.json"
+}
