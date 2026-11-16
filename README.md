@@ -2,7 +2,7 @@
 
 20 个专业角色，覆盖日常协作、产品研究、项目交付与经营管理。
 
-[官方技能库](https://github.com/zbwork/skills) · [维护与开发](#维护与开发)
+[官方技能库](https://github.com/zbwork/skills) · [贡献指南](CONTRIBUTING.md) · [维护与开发](#维护与开发)
 
 ---
 
